@@ -331,7 +331,8 @@ class Sample(Model, OrderedAnnotationsMixin):
             data = method(data)
         return data
 
-    def migrate_sample(self, data):
+    @staticmethod
+    def migrate_sample(data):
         if not data.get('name'):
             data['name'] = data['id']
         if 'version' not in data or data['version'] < '0.13.0':
@@ -352,7 +353,8 @@ class Sample(Model, OrderedAnnotationsMixin):
         data['plugins'] = annotations
         return data
 
-    def get_items(self, data):
+    @staticmethod
+    def get_items(data):
         annotations = (data.pop('plugins', {}).get('annotations-plugin', {})
                            .get('extracts', []))
 
