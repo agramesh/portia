@@ -2,11 +2,11 @@ import unittest
 
 import mock
 
-from portia_api.orm.exceptions import ValidationError
-from portia_api.orm.models import (
+from .utils import mock_storage
+from ..exceptions import ValidationError
+from ..models import (
     Project, Schema, Field, Extractor, Spider, Sample, BaseAnnotation, Item,
     Annotation, SLYBOT_VERSION)
-from .utils import mock_storage
 
 
 class ProjectTestCase(unittest.TestCase):
@@ -195,7 +195,8 @@ class ProjectTestCase(unittest.TestCase):
                 '                }'
                 '            ]'
                 '        }'
-                '    }'
+                '    },'
+                '    "version": "' + SLYBOT_VERSION + '"'
                 '}',
         }
 
@@ -2486,7 +2487,8 @@ class ItemTests(ProjectTestCase):
                 '                }'
                 '            ]'
                 '        }'
-                '    }'
+                '    },'
+                '    "version": "' + SLYBOT_VERSION + '"'
                 '}',
         })
 
