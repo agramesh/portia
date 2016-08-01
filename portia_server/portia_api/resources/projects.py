@@ -37,13 +37,8 @@ class ProjectDataMixin(object):
         # else:
         #     projects = self.project_manager.all_projects()
 
-        projects = [{
-            'id': '1111111',
-            'name': '1111111',
-        }]
-
         project_list = []
-        for project in projects:
+        for project in getattr(self.request, 'projects', []):
             if isinstance(project, string_types):
                 project = {
                     'id': project,
@@ -54,7 +49,8 @@ class ProjectDataMixin(object):
                     project['id'] = project['name']
             project_list.append(project)
 
-        return OrderedDict([(project['id'], project) for project in projects])
+        return OrderedDict([(project['id'], project)
+                            for project in project_list])
 
 
 class ProjectRoute(ProjectDownloadMixin, JsonApiRoute, ProjectDataMixin,

@@ -5,5 +5,5 @@ from .storage import GitStorage
 
 
 def create_storage(project_id, author, branch):
-    storage_class = import_string(settings.PORTIA_DATA_STORAGE)
+    storage_class = import_string(settings.PORTIA_STORAGE_BACKEND)
     return storage_class(project_id, author=author, branch=branch)
